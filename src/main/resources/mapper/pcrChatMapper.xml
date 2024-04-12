@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pcConSystem.dao.pcrChatDao">
+	<insert id="insert_message">
+		INSERT INTO PCRCHAT
+		(PCRCODE,RECEIVE,SEND,MSG,MSGTIME)
+		VALUES(#{pcrCode},#{receive},#{send},#{msg},SYSDATE)
+
+	</insert>
+
+	<select id="select_chattingLog">
+		SELECT *
+		FROM PCRCHAT
+		WHERE (MSGTIME >= TO_DATE(#{loginTime},'YYYY-MM-DD HH24:MI:SS')) AND 
+		PCRCODE=#{pcrCode} AND 		 ( (RECEIVE=#{ad} AND SEND=#{guest})	OR  (RECEIVE=#{guest} AND SEND=#{ad})  )
+		ORDER BY MSGTIME ASC
+
+	</select>
+
+<!-- #{pcrCode}  :: 'ddd'   
+     ${pcrCode}  :: ddd -->
+
+</mapper>

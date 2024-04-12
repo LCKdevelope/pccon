@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pcConSystem.dao.pcrSocietyDao">
+
+	<select id="selectpcrCode">
+		SELECT NVL(MAX(PCRCODE),'pcr000')
+		FROM PCROOM
+
+	</select>
+
+	<insert id="insertPCRoom">
+		INSERT INTO PCROOM
+		(PCRCODE,PCRNAME,PCRLATI,PCRLONG,PCRSEATSEA)
+		VALUES
+		(#{pcrCode},#{pcrName},#{pcrLati},#{pcrLong},#{pcrSeatsEa})
+
+	</insert>
+	<select id="selectPCRoomList">
+		SELECT *
+		FROM PCROOM
+	</select>
+	<insert id="insertSeats">
+		INSERT INTO PCRSEATS
+		(PCRCODE,SEATNUM,SEATSTATE,SEATUSEPROGRAM,SEATDATE)
+		VALUES(#{pcrCode},#{seatNum},'o','','')
+
+
+	</insert>
+
+
+</mapper>
